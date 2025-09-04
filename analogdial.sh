@@ -11,15 +11,15 @@ apt-get install -y sudo ppp mgetty iptables
 usermod -aG sudo nuso
 
 # Configure and start mgetty
-printf $mgetty >> /lib/systemd/system/mgetty@.service
+printf "%s\n" "$mgetty" >> /lib/systemd/system/mgetty@.service
 rm /etc/mgetty/mgetty.config
 printf "%s\n" "$modem" >> /etc/mgetty/mgetty.config
 systemctl enable --now mgetty@ttyACM0.service
 
 # Setup and configure ppp
 rm /etc/ppp/options
-printf $ppp >> /etc/ppp/options
-printf $pppoptions >> /etc/ppp/options.ttyACM0
+printf "%s\n" "$ppp" >> /etc/ppp/options
+printf "%s\n" "$pppoptions" >> /etc/ppp/options.ttyACM0
 
 # Setup the user for dialing in
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd dial
@@ -29,7 +29,7 @@ printf "dial * "dial" *" >> /etc/ppp/pap-secrets
 # Setup rc-local file and service
 printf '%s\n' '#!/bin/bash' 'exit 0' | sudo tee -a /etc/rc.local
 chmod +x /etc/rc.local
-printf $rclocal >> /etc/systemd/system/rc-local.service
+printf "%s\n" "$rclocal" >> /etc/systemd/system/rc-local.service
 systemctl enable rc-local
 
 # Configure ip forwarding and iptables
