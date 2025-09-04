@@ -13,7 +13,7 @@ usermod -aG sudo nuso
 # Configure and start mgetty
 printf $mgetty >> /lib/systemd/system/mgetty@.service
 rm /etc/mgetty/mgetty.config
-printf $modem >> /etc/mgetty/mgetty.config
+printf "%s\n" "$modem" >> /etc/mgetty/mgetty.config
 systemctl enable --now mgetty@ttyACM0.service
 
 # Setup and configure ppp
