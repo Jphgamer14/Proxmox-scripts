@@ -38,3 +38,4 @@ sysctl -p /etc/sysctl.conf
 echo "1" | update-alternatives --config iptables
 sed -i '1a\iptables -t nat -A POSTROUTING -s 192.168.32.0/24 -o ens18 -j MASQUERADE
 
+reboot
