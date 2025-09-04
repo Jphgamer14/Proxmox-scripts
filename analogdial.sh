@@ -36,5 +36,5 @@ systemctl enable rc-local
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf
 echo "1" | update-alternatives --config iptables
-sed -i '/^exit 0$/iptables -t nat -A POSTROUTING -s 192.168.32.0/24 -o ens18 -j MASQUERADE' /etc/rc.local
+sed -i '/^exit 0$/ iptables -t nat -A POSTROUTING -s 192.168.32.0/24 -o ens18 -j MASQUERADE' /etc/rc.local
 
