@@ -23,7 +23,7 @@ echo $pppoptions >> /etc/ppp/options.ttyACM0
 
 # Setup the user for dialing in
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd dial
-echo "dial" | passwd --stdin "dial"
+echo "dial:dial" | chpasswd
 echo "dial * "dial" *" >> /etc/ppp/pap-secrets
 
 # Setup rc-local file and service
