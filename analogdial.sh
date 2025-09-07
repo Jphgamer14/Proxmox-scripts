@@ -5,7 +5,7 @@ source ./variables.sh
 
 # Update and aquire packages first
 apt-get update
-apt-get install -y sudo ppp mgetty iptables
+apt-get install -y sudo ppp mgetty iptables htop neofetch
 
 # Give my user the sudo group
 usermod -aG sudo nuso
