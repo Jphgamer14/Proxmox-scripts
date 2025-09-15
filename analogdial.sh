@@ -5,7 +5,7 @@ source ./variables.sh
 
 # Update and aquire packages first
 apt-get update
-apt-get install -y sudo ppp mgetty iptables htop neofetch
+apt-get install -y sudo ppp mgetty htop neofetch
 
 # Give my user the sudo group
 usermod -aG sudo nuso
@@ -21,16 +21,13 @@ rm /etc/ppp/options
 printf "%s\n" "$ppp" >> /etc/ppp/options
 printf "%s\n" "$pppoptions" >> /etc/ppp/options.ttyACM0
 
-# Setup the user for dialing in
-useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd dial
-printf "dial:dial" | chpasswd
-printf "dial * "dial" *" >> /etc/ppp/pap-secrets
-
-# Setup rc-local file and service
-printf '%s\n' '#!/bin/bash' 'exit 0' | sudo tee -a /etc/rc.local
-chmod +x /etc/rc.local
-printf "%s\n" "$rclocal" >> /etc/systemd/system/rc-local.service
-systemctl enable rc-local
+# Setup the users for dialing in
+useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd nuso
+printf "nuso:112406" | chpasswd
+printf "nuso * "112406" *" >> /etc/ppp/pap-secrets
+useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd nova
+printf "nova:112406" | chpasswd
+printf "nova * "112406" *" >> /etc/ppp/pap-secrets
 
 # Configure ip forwarding and iptables
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf

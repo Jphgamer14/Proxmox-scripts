@@ -14,21 +14,6 @@ PIDFile=/var/run/mgetty.pid.%i
 [Install]
 WantedBy=multi-user.target"
 
-rclocal="[Unit]
- Description=/etc/rc.local Compatibility
- ConditionPathExists=/etc/rc.local
-
-[Service]
- Type=forking
- ExecStart=/etc/rc.local start
- TimeoutSec=0
- StandardOutput=tty
- RemainAfterExit=yes
- SysVStartPriority=99
-
-[Install]
- WantedBy=multi-user.target"
-
  modem="debug 9
 
 port ttyACM0
