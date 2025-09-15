@@ -7,9 +7,6 @@ source ./variables.sh
 apt-get update
 apt-get install -y sudo ppp mgetty htop neofetch
 
-# Give my user the sudo group
-usermod -aG sudo nuso
-
 # Configure and start mgetty
 printf "%s\n" "$mgetty" >> /lib/systemd/system/mgetty@.service
 rm /etc/mgetty/mgetty.config
