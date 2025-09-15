@@ -58,3 +58,9 @@ netmask 255.255.255.0
 noauth
 proxyarp
 lcp-echo-failure 60"
+
+ufw="*nat
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -s 192.168.32.0/24 -o ens18 -j MASQUERADE
+COMMIT"

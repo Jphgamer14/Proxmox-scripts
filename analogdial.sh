@@ -15,6 +15,7 @@ printf "%s\n" "$mgetty" >> /lib/systemd/system/mgetty@.service
 rm /etc/mgetty/mgetty.config
 printf "%s\n" "$modem" >> /etc/mgetty/mgetty.config
 systemctl enable --now mgetty@ttyACM0.service
+systemctl enable --now mgetty@ttyds01.service
 
 # Setup and configure ppp
 rm /etc/ppp/options
@@ -29,9 +30,13 @@ useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd nova
 printf "nova:112406" | chpasswd
 printf "nova * "112406" *" >> /etc/ppp/pap-secrets
 
-# Configure ip forwarding and iptables
+# Configure ip forwarding
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf
-echo "1" | update-alternatives --config iptables
-sed -i '/^exit 0$/ iptables -t nat -A POSTROUTING -s 192.168.32.0/24 -o ens18 -j MASQUERADE' /etc/rc.local
+ufw disable
+ufw allow ssh
+ufw allow 1222/tcp
+ufw allow 10005
+printf "%s\n" "$ufw" >> /etc/ufw/before.rules
+printf "y" | ufw enable 
 
