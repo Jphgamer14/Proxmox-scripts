@@ -24,6 +24,28 @@ port ttyACM0
  ignore-carrier no
  toggle-dtr yes
  toggle-dtr-waittime 500
+ rings 2
+ 
+port ttyds01
+ port-owner root
+ port-group dialout
+ port-mode 0660
+ init-chat "" AT&F14+IF5+IM4;S0=0
+ data-only yes
+ ignore-carrier no
+ toggle-dtr no
+ toggle-dtr-waittime 500
+ rings 2
+
+port ttyds02
+ port-owner root
+ port-group dialout
+ port-mode 0660
+ init-chat "" AT&F14+IF5+IM4;S0=0
+ data-only yes
+ ignore-carrier no
+ toggle-dtr no
+ toggle-dtr-waittime 500
  rings 2"
 
  ppp="# Define the DNS server for the client to use
@@ -53,7 +75,7 @@ noipx"
 pppoptions="local
 lock
 nocrtscts
-192.168.1.200:192.168.1.201
+192.168.1.20:192.168.1.21
 netmask 255.255.255.0
 noauth
 proxyarp
@@ -62,5 +84,17 @@ lcp-echo-failure 60"
 ufw="*nat
 :PREROUTING ACCEPT [0:0]
 :POSTROUTING ACCEPT [0:0]
--A POSTROUTING -s 192.168.32.0/24 -o ens18 -j MASQUERADE
+-A POSTROUTING -s 192.168.1.0/24 -o ens18 -j MASQUERADE
 COMMIT"
+
+divastart="[Unit]
+Description=Diva System Release Startup Script
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/opendiva/divas/Start
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target"
