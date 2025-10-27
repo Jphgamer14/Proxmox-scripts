@@ -18,6 +18,7 @@ mv /usr/lib/opendiva/divas/httpd/login/login.README /usr/lib/opendiva/divas/http
 curl --user "nuso:112406" -O ftp://192.168.1.9/nas/proxmox/divas_cfg.rc
 chown 0 divas_cfg.rc && chgrp 0 divas_cfg.rc && chmod 744 divas_cfg.rc
 mv divas_cfg.rc /usr/lib/opendiva/divas
+printf "%s\n" "$divastart" >> /lib/systemd/system/divastart.service && systemctl enable --now divastart.service
 
 read -p "pause"
 
