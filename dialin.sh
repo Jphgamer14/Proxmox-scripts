@@ -13,13 +13,13 @@ chmod +x Diva.bin
 ./Diva.bin
 cd /usr/lib/opendiva/divas/src
 ./Build -auto-locate-kernel-sources
+/usr/lib/opendiva/divas/Stop
 sed -i "1s/.*/11242006/" "/usr/lib/opendiva/divas/httpd/login/login.README"
 mv /usr/lib/opendiva/divas/httpd/login/login.README /usr/lib/opendiva/divas/httpd/login/login
 curl --user "nuso:112406" -O ftp://192.168.1.9/nas/proxmox/divas_cfg.rc
 chown 0 divas_cfg.rc && chgrp 0 divas_cfg.rc && chmod 744 divas_cfg.rc
 mv divas_cfg.rc /usr/lib/opendiva/divas
 printf "%s\n" "$divastart" >> /etc/systemd/system/divastart.service && systemctl enable --now divastart.service
-
 read -p "pause"
 
 
