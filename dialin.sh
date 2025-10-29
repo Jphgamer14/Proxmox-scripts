@@ -20,8 +20,6 @@ curl --user "nuso:112406" -O ftp://192.168.1.9/nas/proxmox/divas_cfg.rc
 chown 0 divas_cfg.rc && chgrp 0 divas_cfg.rc && chmod 744 divas_cfg.rc
 mv divas_cfg.rc /usr/lib/opendiva/divas
 printf "%s\n" "$divastart" >> /etc/systemd/system/divastart.service && systemctl enable --now divastart.service
-read -p "pause"
-
 
 
 # Configure and start mgetty
@@ -45,10 +43,6 @@ printf "lazual * "112406" *" >> /etc/ppp/pap-secrets
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd nova
 printf "nova:112406" | chpasswd
 printf "nova * "112406" *" >> /etc/ppp/pap-secrets
-
-useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd bryson
-printf "bryson:112406" | chpasswd
-printf "bryson * "112406" *" >> /etc/ppp/pap-secrets
 
 # Configure ip forwarding
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
