@@ -2,8 +2,8 @@
 mgetty="[Unit]
 Description=External Modem %I
 Documentation=man:mgetty(8)
-Requires=systemd-udev-settle.service
-After=systemd-udev-settle.service
+Requires=systemd-udev-settle.service divastart.service
+After=systemd-udev-settle.service divastart.service
 
 [Service]
 Type=simple
