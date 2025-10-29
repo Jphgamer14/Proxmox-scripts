@@ -30,7 +30,7 @@ port ttyds01
  port-owner root
  port-group dialout
  port-mode 0660
- init-chat "" AT&F14+IF5+IM4;S0=0
+ init-chat \"\" AT&F14+IF5+IM4;S0=0
  data-only yes
  ignore-carrier no
  toggle-dtr no
@@ -41,7 +41,7 @@ port ttyds02
  port-owner root
  port-group dialout
  port-mode 0660
- init-chat "" AT&F14+IF5+IM4;S0=0
+ init-chat \"\" AT&F14+IF5+IM4;S0=0
  data-only yes
  ignore-carrier no
  toggle-dtr no
