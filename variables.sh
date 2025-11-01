@@ -72,14 +72,50 @@ proxyarp
 # Disable the IPXCP and IPX protocols.
 noipx"
 
-pppoptions="local
+pppACM="local
 lock
 nocrtscts
-192.168.1.20:192.168.1.21
+192.168.2.1:192.168.2.2
 netmask 255.255.255.0
 noauth
 proxyarp
-lcp-echo-failure 60"
+lcp-echo-failure 60
+multilink
+bundle mybundle
+mrru 1524
+mtu 1500
+mru 1500
+nobsdcomp"
+
+pppDS1="local
+lock
+nocrtscts
+192.168.2.3:192.168.2.4
+netmask 255.255.255.0
+noauth
+proxyarp
+lcp-echo-failure 60
+multilink
+bundle mybundle
+mrru 1524
+mtu 1500
+mru 1500
+nobsdcomp"
+
+pppDS2="local
+lock
+nocrtscts
+192.168.2.5:192.168.2.6
+netmask 255.255.255.0
+noauth
+proxyarp
+lcp-echo-failure 60
+multilink
+bundle mybundle
+mrru 1524
+mtu 1500
+mru 1500
+nobsdcomp"
 
 ufw="*nat
 :PREROUTING ACCEPT [0:0]

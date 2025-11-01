@@ -33,7 +33,9 @@ systemctl enable --now mgetty@ttyds02.service
 # Setup and configure ppp
 rm /etc/ppp/options
 printf "%s\n" "$ppp" >> /etc/ppp/options
-printf "%s\n" "$pppoptions" >> /etc/ppp/options.ttyACM0
+printf "%s\n" "$pppACM" >> /etc/ppp/options.ttyACM0
+printf "%s\n" "$pppDS1" >> /etc/ppp/options.ttyds1
+printf "%s\n" "$pppDS2" >> /etc/ppp/options.ttyds2
 
 # Setup the users for dialing in
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd lazual
@@ -42,7 +44,7 @@ printf "lazual * "112406" *" >> /etc/ppp/pap-secrets
 
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd nova
 printf "nova:112406" | chpasswd
-printf "nova * "112406" *" >> /etc/ppp/pap-secrets
+printf "%s\n" "nova * "112406" *" >> /etc/ppp/pap-secrets
 
 # Configure ip forwarding
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
