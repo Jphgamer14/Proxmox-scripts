@@ -134,3 +134,6 @@ RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target"
+
+papsecret="nova * "112406" *
+lazual * "112406" *"

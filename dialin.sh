@@ -40,11 +40,11 @@ printf "%s\n" "$pppDS2" >> /etc/ppp/options.ttyds2
 # Setup the users for dialing in
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd lazual
 printf "lazual:112406" | chpasswd
-printf "lazual * "112406" *" >> /etc/ppp/pap-secrets
 
 useradd -G dialout,dip,users -m -g users -s /usr/sbin/pppd nova
 printf "nova:112406" | chpasswd
-printf "%s\n" "nova * "112406" *" >> /etc/ppp/pap-secrets
+
+printf "%s\n" "$papsecret" >> /etc/ppp/pap-secrets
 
 # Configure ip forwarding
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
