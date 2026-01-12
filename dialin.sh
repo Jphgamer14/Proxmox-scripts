@@ -57,4 +57,4 @@ ufw allow 1222/tcp
 ufw allow 10005
 printf "%s\n" "$ufw" >> /etc/ufw/before.rules
 printf "y" | ufw enable 
-
+printf "Connect" >> /etc/motd
